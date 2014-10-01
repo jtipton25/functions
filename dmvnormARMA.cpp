@@ -5,7 +5,7 @@ const double log2pi = std::log(2.0 * M_PI);
 // [[Rcpp::depends("RcppArmadillo")]]
 // [[Rcpp::export]]
 
-arma::vec dmvnormArma(arma::mat x, arma::rowvec mean, arma::mat sigma, bool logd = false) { 
+arma::vec dmvnormArma(arma::mat & x, arma::rowvec & mean, arma::mat & sigma, bool logd = false) { 
     int n = x.n_rows;
     int xdim = x.n_cols;
     arma::vec out(n);
