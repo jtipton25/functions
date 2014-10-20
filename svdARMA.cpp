@@ -2,17 +2,23 @@
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
+using namespace Rcpp;
+using namespace arma;
+
 // [[Rcpp::export]]
-Rcpp::List svdARMA(const arma::mat & X) {
-    arma::mat U, V;
-    arma::vec S;
-    arma::svd(U, S, V, X, "standard");
-    return Rcpp::List::create(Rcpp::Named("sd") = S, Rcpp::Named("U") = U);
+
+List svdARMA(const mat & X) {
+    mat U, V;
+    vec S;
+    svd(U, S, V, X, "standard");
+    return List::create(Named("sd") = S, Named("U") = U);
 }
 
-Rcpp::List dcsvdARMA(const arma::mat & X) {
-    arma::mat U, V;
-    arma::vec S;
-    arma::svd(U, S, V, X, "dc");
-    return Rcpp::List::create(Rcpp::Named("sd") = S, Rcpp::Named("U") = U);
+// [[Rcpp::export]]
+
+List dcsvdARMA(const mat & X) {
+    mat U, V;
+    vec S;
+    svd(U, S, V, X, "dc");
+    return List::create(Named("sd") = S, Named("U") = U);
 }
