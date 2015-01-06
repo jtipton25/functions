@@ -11,7 +11,7 @@ List svdARMA(const mat & X) {
     mat U, V;
     vec S;
     svd(U, S, V, X, "standard");
-    return List::create(Named("sd") = S, Named("U") = U);
+    return List::create(Named("sd") = S, Named("U") = U, Named("V") = V);
 }
 
 // [[Rcpp::export]]
