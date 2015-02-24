@@ -3,7 +3,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 
-IntegerVector order_(NumericVector x) {
+IntegerVector order_(const NumericVector x) {
   if (is_true(any(duplicated(x)))) {
     Rf_warning("There are duplicates in 'x'; order not guaranteed to match that of R's base::order");
   }

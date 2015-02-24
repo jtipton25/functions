@@ -4,25 +4,8 @@
 using namespace Rcpp;
 using namespace arma;
 
-//// [[Rcpp::export]]
-//
-//mat makeDistARMA(mat & locs) {
-//  int nrows = locs.n_rows;
-//  mat D(nrows, nrows, fill::zeros);
-//  for(int i = 0; i < nrows; i++){
-//    for(int j = 0; j < nrows; j++){
-//      double tmp = 0;
-//      for(int k = 0; k < 2; k++){
-//      tmp = tmp + pow(locs(i, k) - locs(j, k), 2);
-//      }
-//      D(i, j) = sqrt(tmp);
-//    }
-//  }
-//  return(D);
-//}
-
 // [[Rcpp::export]]
-mat makeDistARMA(mat & coords1, mat & coords2) {
+mat makeDistARMA(const mat & coords1, const mat & coords2) {
   int nrows1 = coords1.n_rows;
   int nrows2 = coords2.n_rows;
   mat D(nrows1, nrows2, fill::zeros);

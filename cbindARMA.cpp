@@ -5,7 +5,7 @@ using namespace Rcpp;
 using namespace arma;
 
 //[[Rcpp::export]]
-mat cbindARMA(mat & A, mat & B){
+mat cbindARMA(const mat & A, const mat & B){
 	int nrows = A.n_rows;		
 	int ncolsA = A.n_cols;
 	int ncolsB = B.n_cols;

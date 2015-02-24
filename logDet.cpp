@@ -5,7 +5,7 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-double logDet(mat x) {
-    mat rooti = chol(x);
+double logDet(const mat Sig) {
+    mat rooti = chol(Sig);
     return(2 * sum(log(rooti.diag())));
 }

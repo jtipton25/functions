@@ -8,7 +8,7 @@ using namespace arma;
 const double log2pi = std::log(2.0 * M_PI);
 
 // [[Rcpp::export]]
-double dMVNorm(vec & y, vec & mu, mat & Sig){ 
+double dMVNorm(const vec & y, const vec & mu, const mat & Sig){ 
    mat rooti = trans(inv(trimatu(chol(Sig))));
    double rootisum = sum(log(rooti.diag()));      
    vec z = rooti * (y - mu) ;      
@@ -17,10 +17,11 @@ double dMVNorm(vec & y, vec & mu, mat & Sig){
 }
 
 // [[Rcpp::export]]
-vec dmvnormArmaVec(vec & x, rowvec & mean, mat & sigma, bool logd = false) { 
+vec dmvnormArmaVec(const vec & x, const rowvec & mean, const mat & Sigma,
+										const bool logd = false) { 
     int n = x.n_elem;
     vec out(n);
-    mat rooti = trans(inv(trimatu(chol(sigma))));
+    mat rooti = trans(inv(trimatu(chol(Sigma))));
     double rootisum = sum(log(rooti.diag()));
     double constants = -(n / 2.0) * log2pi;
     for (int i=0; i < n; i++) {

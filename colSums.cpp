@@ -6,7 +6,7 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-vec colSums(mat & X){
+vec colSums(const mat & X){
    int nCols = X.n_cols;
    vec out(nCols);
    for(int i = 0; i < nCols; i++){

@@ -5,7 +5,7 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-mat makeDistARMA2(mat & coords1, mat & coords2) {
+mat makeDistARMA2(const mat & coords1, const mat & coords2) {
   int nrows1 = coords1.n_rows;
   int nrows2 = coords2.n_rows;
   mat D(nrows1, nrows2, fill::zeros);

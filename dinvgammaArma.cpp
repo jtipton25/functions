@@ -5,7 +5,8 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-double dinvgammaArma(double & x, double & shape, double & rate, bool logarithm = true){
+double dinvgammaArma(const double & x, const double & shape, 
+											const double & rate, const bool logarithm = true){
   double logval = shape * log(rate) - lgamma(shape) - rate / x - (shape + 1.0) * log(x);
   if(!logarithm){
     return(logval);
@@ -15,7 +16,8 @@ double dinvgammaArma(double & x, double & shape, double & rate, bool logarithm =
 }
 
 // [[Rcpp::export]]
-vec dinvgammaArmaVec(vec & x, double & shape, double & rate, bool logarithm = true){
+vec dinvgammaArmaVec(const vec & x, const double & shape, const double & rate,
+											const bool logarithm = true){
   int n = x.n_elem;
   vec logval(n, fill::zeros);
   for(int i = 0; i < n; i++){
