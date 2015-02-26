@@ -9,28 +9,30 @@ const double log2pi = std::log(2.0 * M_PI);
 
 // [[Rcpp::export]]
 double dMVNorm(const vec & y, const vec & mu, const mat & Sig){ 
+   int n = y.n_elem;
    mat rooti = trans(inv(trimatu(chol(Sig))));
-   double rootisum = sum(log(rooti.diag()));      
+   double rootisum = sum(log(rooti.diag()));  
+   double constants = -(n / 2.0) * log2pi;
    vec z = rooti * (y - mu) ;      
-   double out = - 0.5 * sum(z % z) + rootisum;       
+   double out = constants - 0.5 * sum(z % z) + rootisum;       
    return(out);
 }
 
-// [[Rcpp::export]]
-vec dmvnormArmaVec(const vec & x, const rowvec & mean, const mat & Sigma,
-										const bool logd = false) { 
-    int n = x.n_elem;
-    vec out(n);
-    mat rooti = trans(inv(trimatu(chol(Sigma))));
-    double rootisum = sum(log(rooti.diag()));
-    double constants = -(n / 2.0) * log2pi;
-    for (int i=0; i < n; i++) {
-        vec z = rooti * trans(x - mean) ;    
-        out(i)      = constants - 0.5 * sum(z%z) + rootisum;     
-    }  
-    if (logd == false) {
-        out = exp(out);
-    }
-    return(out);
-}
+//// [[Rcpp::export]]
+//vec dmvnormArmaVec(const vec & x, const vec & mean, const mat & Sigma,
+//										const bool logd = false) { 
+//    int n = x.n_elem;
+//    vec out(n);
+//    mat rooti = trans(inv(trimatu(chol(Sigma))));
+//    double rootisum = sum(log(rooti.diag()));
+//    double constants = -(n / 2.0) * log2pi;
+//    for (int i=0; i < n; i++) {
+//        vec z = rooti * (x - mean);    
+//        out(i)      = constants - 0.5 * sum(z%z) + rootisum;     
+//    }  
+//    if (logd == false) {
+//        out = exp(out);
+//    }
+//    return(out);
+//}
 
